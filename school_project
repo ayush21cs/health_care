@@ -1,7 +1,7 @@
 import pygame; pygame.init()
 import time
 clock = pygame.time.Clock()
-running = True
+running = ttl = True
 name = input("Enter your name: ")
 age = input("Enter your age: ")
 gender = input("Enter your gender: ")
@@ -9,22 +9,27 @@ bldgrp = input("Enter your blood group: ")
 screen = pygame.display.set_mode((750, 750))
 inf = {1:name, 2:age, 3:gender, 4:bldgrp}
 inf1 = {1:"name:", 2:"age:", 3:"gender:", 4:"blood group:"}
-book1 = {1:"", 
-        2:"Do you want to donate or recieve blood?",
-        3:"hi",
-        4:"no",
-        5:"yes",
-        6:"ok",
-        7:"leave", 
-        8:"come",
-        9:"hellno",
-        10:"asd", 
-        11:"BCD",
-        12:"obcd",
-        13:"obct", 
-        14:"e",
-        15:"f"}
-bclk = {350: "1", 500:"2",650:"3", 600:"4"}
+book1 = {
+    1:"Do you want to REQUEST or DONATE blood?", 
+    2:"Do you want to donate or recieve blood?",
+    3:"hi",
+    4:"no",
+    5:"yes",
+    6:"ok",
+    7:"leave", 
+    8:"come",
+    9:"hellno",
+    10:"asd", 
+    11:"BCD",
+    12:"obcd",
+    13:"obct", 
+    14:"e",
+    15:"f"}
+ans_book1 = {}
+ans1 = ""
+script = {1:book1}
+bclk = {350: "1", 500:"2",650:"3", 600:"4",400:"5",399:"6"}
+prog = 0
 class Button:
     def __init__(self, posx, posy, sizex, sizey, is_button):
         self.sizex = sizex
@@ -33,24 +38,23 @@ class Button:
         self.posy = posy
         self.is_button = is_button
         self.n = 0
-        self.prog = 1
     def draw(self):
+        global ttl,a, prog
         font = pygame.font.SysFont("Arial", 35)
         if self.posx <= m_x <= self.sizex + self.posx and  self.posy <= m_y <= self.sizey + self.posy and self.is_button == True:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if self.n == 0:
-                    a = bclk[self.posy]
-                    p = book1[self.prog]
-                    print(a)
-                    q = font.render(p, True, (0, 0, 0))
-                    screen.blit(q, (20, 20))
-                    self.prog += 1
-                    self.n = 1
+                    if ttl: a = int(bclk[self.posy])
+                    else: b = int(bclk[self.posy])
+                    prog += 1
+                self.n = 1
             else:
                 pygame.draw.rect(screen, (100, 0, 0), (self.posx, self.posy, self.sizex, self.sizey))
                 self.n = 0
         else:
             pygame.draw.rect(screen, (255, 0, 0), (self.posx, self.posy, self.sizex, self.sizey))
+        if prog != 0:
+            ttl = False
 class Sentence:
     def __init__(self, text, sposx, sposy, size):
         self.text = text
@@ -71,9 +75,9 @@ buttonp2 = Button(100, 500, 250, 75, True)
 buttonp3 = Button(100, 650, 250, 75, True)
 about_button = Button(500, 600, 150, 75, True)
 title_box = Button(20, 20, 710, 200, False)
-by = Button(120, 300, 20, 20, True)
-bn = Button(300, 300, 20, 20, True)
-bq = Button(20, 20, 710, 60, False)
+by = Button(470, 400, 130, 80, True)
+bn = Button(120, 399, 130, 80, True)
+bq = Button(20, 20, 710, 200, False)
 ask = [by, bn, bq]
 texts = [title, sub_ttl1, sub_ttl2, sub_ttl3, abt_txt]
 buttons = [buttonp1, buttonp2, buttonp3, about_button, title_box]
@@ -85,17 +89,26 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT or k[pygame.K_ESCAPE]:
             running = False
-    for i in range(1, 5):
-        a = font1.render(inf[i], True, (150, 150, 150))
-        b = font1.render(inf1[i], True, (150, 150, 150))
-        screen.blit(a, (500, 50*i + 300))
-        screen.blit(b, (375, 50*i + 300))
-    for bt in buttons:
-        bt.draw()
-    for txt in texts:
-        txt.show()
-    infp = pygame.font.SysFont("Arial", 40).render("Login Information:", True, (220, 60, 40))
-    screen.blit(infp, (400, 275))
+    if ttl == True:
+        for bt in buttons:
+            bt.draw()
+        for txt in texts:
+            txt.show()
+        infp = pygame.font.SysFont("Arial", 40).render("Login Information:", True, (220, 60, 40))
+        for i in range(1, 5):
+            a1 = font1.render(inf[i], True, (150, 150, 150))
+            b1 = font1.render(inf1[i], True, (150, 150, 150))
+            screen.blit(a1, (500, 50*i + 300))
+            screen.blit(b1, (375, 50*i + 300))
+            screen.blit(infp, (400, 275))
+    else:
+        for btns in ask:
+            btns.draw()
+    try:
+        curtxt = font1.render(script[a][prog], True, (0,255,0))
+        screen.blit(curtxt, (50, 50))
+    except:
+        pass
     pygame.display.flip()
     clock.tick(60)
 pygame.quit()
