@@ -5,26 +5,6 @@ try:
     import tkinter as tk
 except:
     print("installing pygame as well as tkinter through pip install command in CMD is required")
-def Feedback():
-    Window_Tkinter = tk.Tk()
-    def Button_Tk():
-        Window_Tkinter.quit()
-        Window_Tkinter.destroy()
-    Window_Tkinter.geometry('800x500')
-    Window_Tkinter.maxsize(800,500)
-    Window_Tkinter.minsize(800,500)
-    Window_Tkinter.title('Feedback')
-    Feedback = tk.Label(text='We Need Your Feedback',font=('Monospace',40),fg='lime green')
-    label_1 = tk.Label(text='Help Us To Improve By Giving Just a Feedback!',font=('City',20),fg='Red')
-    label = tk.Label(text='You Can Tell Us about your Experience',font=('arial',30))
-    Improved = tk.Entry(width=50)
-    slider = tk.Scale(Window_Tkinter, from_=0, to=5, orient="horizontal")
-    Button = tk.Button(text='Submit',font=('arial',30),fg='white',bg='grey',height=2,width=10,command=(Button_Tk))
-    List = [Feedback,label_1,label,Improved,slider]
-    for i in List:
-        i.pack()
-    Button.place(x=300, y=400)
-    Window_Tkinter.mainloop()
 h = 220
 a_ = b_ = c_ = 0
 d_ = 0.03
@@ -381,4 +361,25 @@ while running and run:
     pygame.display.flip()
     clock.tick(60)
 pygame.quit()
-Feedback()
+import customtkinter as ctk
+root = ctk.CTk()
+root.title("Feedback")
+root.geometry('800x500')
+root.maxsize(800, 500)
+root.minsize(800, 500)
+
+def Button_Tk():
+    feedback = Improved.get()
+    print("Feedback submitted:", feedback)
+    root.destroy()
+H1_Line = ctk.CTkLabel(root, text='We Need Your Feedback', font=('Arial', 40), text_color="lime green")
+H1_Line.place(x=100, y=20)
+H2_Line = ctk.CTkLabel(root, text='Help Us to improve by giving just a Feedback!',font=('Arial', 24), text_color="red")
+H2_Line.place(x=100, y=80)
+H3_Line = ctk.CTkLabel(root, text='You can tell us about your experience:',font=('Arial', 22))
+H3_Line.place(x=100, y=140)
+Improved = ctk.CTkEntry(root, width=600, height=100, placeholder_text="Write your feedback here...")
+Improved.place(x=100, y=180)
+Button = ctk.CTkButton(root, text='Submit', font=('Arial', 24), command=Button_Tk, width=200, height=50)
+Button.place(x=300, y=320)
+root.mainloop()
