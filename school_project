@@ -1,17 +1,19 @@
-'''installing pygame as well as tkinter through pip install command in CMD is REQUIRED'''
+'''installing  pygame, tkinter and customtkinter through pip install command in CMD is REQUIRED'''
 '''RECOMMENDED RESOLUTION IS 1920x1080 FOR BEST RESULTS'''
 try:
     import pygame; pygame.init()
     import tkinter as tk
+    import customtkinter as ctk
 except:
-    print("installing pygame as well as tkinter through pip install command in CMD is required")
+    print("installing  pygame, tkinter and customtkinter through pip install command in CMD is REQUIRED")
 h = 220
 a_ = b_ = c_ = 0
 d_ = 0.03
 f_ = 0.04
 g_ = 0.05
 clock = pygame.time.Clock()
-running = run= True
+running = True 
+run= run1 = False
 a = tk.Tk()
 def command():
     global name_input, age_input, gender_input, blood_group_input, nets, run
@@ -56,45 +58,45 @@ for ent in entries:
 button.pack()
 warn.pack()
 a.mainloop()
-import customtkinter as ctk 
-xyz = ctk.CTk() 
-
-xyz.title('BMI calculator') 
-xyz.geometry('300x220') 
-xyz.maxsize(300,200) 
-xyz.minsize(300,200) 
-xyzl = ctk.CTkLabel(xyz,text='BMI calulator',font=('Jokerman',30)) 
-xyzl.place(x=60,y=0) 
-weight = ctk.CTkLabel(xyz,text='Enter Your Weight:') 
-weight.place(x=40,y=60) 
-height = ctk.CTkLabel(xyz,text='Enter Your Height:') 
-height.place(x=40,y=90) 
-entryw = ctk.CTkEntry(xyz,width=70,height=20) 
-entryw.place(x=150,y=60) 
-entryh = ctk.CTkEntry(xyz,width=70,height=20) 
-entryh.place(x=150,y=90) 
-result_label = ctk.CTkLabel(xyz, text="")
-result_label.place(x=80, y=180)
-def btnn():
-    try:
-        valuew = float(entryw.get())
-        valueh = float(entryh.get())
-        if valueh == 0:
-            result_label.configure(text="Height cannot be zero.")
-            return
-        xyz.quit()
-        xyz.destroy()
-
-    except ValueError:
-        result_label.configure(text="Enter valid numbers.")
-
-
-
-
-btn = ctk.CTkButton(xyz,text='Confirm',height=30,width=70,command=btnn) 
-btn.place(x=130,y=150) 
-print()
-xyz.mainloop()
+if run == True:
+    xyz = ctk.CTk() 
+    xyz.title('BMI calculator') 
+    xyz.geometry('300x220') 
+    xyz.maxsize(300,200) 
+    xyz.minsize(300,200) 
+    xyzl = ctk.CTkLabel(xyz,text='BMI calulator',font=('Jokerman',30)) 
+    xyzl.place(x=60,y=0) 
+    weight = ctk.CTkLabel(xyz,text='Enter Your Weight(Kg):') 
+    weight.place(x=20,y=60) 
+    height = ctk.CTkLabel(xyz,text='Enter Your Height(m):') 
+    height.place(x=20,y=90) 
+    entryw = ctk.CTkEntry(xyz,width=70,height=20) 
+    entryw.place(x=150,y=60) 
+    entryh = ctk.CTkEntry(xyz,width=70,height=20) 
+    entryh.place(x=150,y=90) 
+    result_label = ctk.CTkLabel(xyz, text="")
+    result_label.place(x=70, y=180)
+    def btnn():
+        global run1, valueh, valuew
+        try:
+            valuew = float(entryw.get())
+            valueh = float(entryh.get())
+            if 25>valuew or 1800<=valuew:
+                result_label.configure(text="Specified weight is not normal")
+                return
+            elif 0.5>valueh or 2.72<valueh:
+                result_label.configure(text="Specified height is not possible")
+                return
+            run1 = True
+            xyz.quit()
+            xyz.destroy()
+        except ValueError:
+            result_label.configure(text="Enter valid numbers.")
+    btn = ctk.CTkButton(xyz,text='Confirm',height=30,width=70,command=btnn) 
+    btn.place(x=130,y=150) 
+    print()
+    xyz.mainloop()
+BMI = round((valuew/valueh**2),2)
 ackn = {
     1:"Thanks to all my teammates for working with me and helping in designing and programming.",
     2:"Special thanks Mr. Sunil Kumar Gupta sir (Computer Science) and Mrs Kiran Pawar madam (Nurse),",
@@ -115,11 +117,10 @@ aboutinf = {
     11:"Government shall make to help people."}
 creds = {
     1:"Yuvraj Bain, Anupam Singh Kushwaha and Atharv Saxena",
-    2:"Shourya Pare and Ayush Mandrai"
-}
-screen = pygame.display.set_mode((800, 750))
-inf = {1:name_input, 2:age_input, 3:gender_input, 4:blood_group_input}
-inf1 = {1:"name:", 2:"age:", 3:"gender:", 4:"blood group:"}
+    2:"Shourya Pare and Ayush Mandrai"}
+screen = pygame.display.set_mode((850, 850))
+inf = {1:name_input, 2:age_input, 3:gender_input, 4:blood_group_input, 5:str(BMI)}
+inf1 = {1:"name:", 2:"age:", 3:"gender:", 4:"blood group:", 5:"BMI:"}
 underbook = {
     1:"Ok so do you eat less?", 
     2:"Do you drink an less amount of water?",
@@ -175,13 +176,12 @@ ans_book2 = {
     8:"having bad posture is bad, try sitting straight, have your neck straight, keep your chest straight, avoid putting shoulder more to the front (its called hunch)"}
 mcq = {"Physical Fitness":book2, "Diet Control":book1}
 ans1 = ans2= ans3= ""
-prog = prog1 = prog3= dtb= 0
-n = 0
+prog = prog1 = prog3= dtb=n= 0
 def draw(rect, text, is_button, txtsize):
     global prog, n, prog1, prog3,dtb, btd4
     if rect.collidepoint((m_x,m_y)) and is_button:
         b = buttonp1.collidepoint((m_x,m_y))
-        if b and int(age_input) < 18: screen.blit(pygame.font.SysFont(None,30).render("NOT ALLOWED for your age!(ONLY 18+)",True,(255,0,0)), (15,285))
+        if b and int(age_input) < 18: screen.blit(pygame.font.SysFont(None,33).render("NOT ALLOWED for your age!(ONLY 18+)",True,(255,0,0)), (15,350))
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if event.button==1 and n==0:
                 if bk.collidepoint((m_x,m_y)): prog=prog3= prog1= 0
@@ -220,22 +220,26 @@ def draw(rect, text, is_button, txtsize):
     sent = font2.render(text, True, (255,255,255))
     sent1 = sent.get_rect(center=rect.center)
     screen.blit(sent,sent1)
+sizex = 300
+sizey = 80
+bh = 75
+asky = 80
 bldqna = ["DONATE","REQUEST","Do you want to REQUEST or DONATE blood?", "BACK"]
 dtqna = store= ["UNDER","OVER","Are you under or over weight?", "BACK"]
-buttonp1     = pygame.Rect(70, 320, 250, 75)
-buttonp2     = pygame.Rect(70, 470, 250, 75)
-buttonp3     = pygame.Rect(70, 620, 250, 75)
-about_button = pygame.Rect(470, 620, 150, 75)
-title_box    = pygame.Rect(20, 20, 760, 200)
-by           = pygame.Rect(470, 400, 150, 80)
-bn           = pygame.Rect(120, 399, 150, 80)
-bq           = pygame.Rect(20, 20, 760, 200)
-bk           = pygame.Rect(20, 670, 130, 80)
+buttonp1     = pygame.Rect(70, 320+bh, sizex, sizey)
+buttonp2     = pygame.Rect(70, 470+bh, sizex, sizey)
+buttonp3     = pygame.Rect(70, 620+bh, sizex, sizey)
+about_button = pygame.Rect(500, 620+bh, sizex - 100, sizey)
+title_box    = pygame.Rect(20, 20, 810, 250)
+bq           = pygame.Rect(20, 20, 810, 250)
+by           = pygame.Rect(510, 400+asky, 150, 80)
+bn           = pygame.Rect(160, 400+asky, 150, 80)
+bk           = pygame.Rect(20, 670+asky, 130, 80)
 dumbox       = pygame.Rect(1000, 1000, 1,1)
 ask = [by, bn, bq,bk,dumbox]
 isqna = [True,True,False,True]
-qnas = [40, 40, 35,40]
-tsz = [40,40,40,40,130]
+qnas = [40, 40, 40,40]
+tsz = [50,50,50,50,140]
 texts = ["Blood Support", "Physical Fitness", "Diet Control", "About(i)","HEALTH CARE"]
 isbtn = [True,True,True,True,False]
 buttons = [buttonp1, buttonp2, buttonp3, about_button, title_box]
@@ -256,7 +260,9 @@ list_BG = {
 hpBG = ["(1) Sharda Hospital","(2) 1225 Hospital","(3) JK Hospital"]
 input_BG = list_BG[blood_group_input].split("_")
 askqna = ["YES","NO","", "BACK"]
-while running and run:
+rec = pygame.font.SysFont("Arial", 30).render("RECOMMENDED OPTION:",True,(75,75,75))
+on =None
+while running and run and run1:
     screen.fill((0, 0, 0))
     if prog1 == "Physical Fitness":
         try:
@@ -274,6 +280,13 @@ while running and run:
             ab.mainloop()
             prog=prog1=0
     if prog1 == "Diet Control":
+        if BMI < 18.5:
+            on = by
+        elif BMI > 24.9:
+            on = bn
+        try:
+            if prog ==1:screen.blit(rec, (rec.get_rect(center=on.center).x,rec.get_rect(center=on.center).y - 70 ))
+        except:pass
         if prog3 == "UNDER":
             try:
                 if dtb == "YES":
@@ -282,7 +295,7 @@ while running and run:
                 dtqna = ["YES","NO",mcq["Diet Control"]["UNDER"][prog-1], "BACK"]
             except:
                 if ans2 == "":
-                    ans2 = f"From the diet control survey, you seems to be doing well, but if you are really underweight, and still dont have any issue, you should still consult a doctor"
+                    ans2 = f"From the diet control survey, you seems to be doing well, but if you are really underweight, and still don't have any issue, you should still consult a doctor"
                 ab2 = tk.Tk()
                 ab2.geometry('500x500')
                 ttlb = tk.Label(text=ans2,wraplength=500, justify="left",font=(None,15))
@@ -298,7 +311,7 @@ while running and run:
                 dtqna = ["YES","NO",mcq["Diet Control"]["OVER"][prog-1], "BACK"]
             except:
                 if ans3 == "":
-                    ans3 = f"From the diet control survey, you seems to be doing well, but if you are really verweight, and still dont have any issue, you should still consult a doctor"
+                    ans3 = f"From the diet control survey, you seems to be doing well, but if you are really overweight, and still don't have any issue, you should still consult a doctor"
                 ab3 = tk.Tk()
                 ab3.geometry('500x500')
                 ttlb = tk.Label(text=ans3,wraplength=500, justify="left",font=(None,15))
@@ -320,54 +333,50 @@ while running and run:
     if prog == 0:
         for btns in range(0, 5):
             draw(buttons[btns],texts[btns],isbtn[btns],tsz[btns])
-        infp = pygame.font.SysFont("Arial", 40).render("Login Information:", True, (220, 60, 40))
-        for i in range(1, 5):
-            a1 = font1.render(inf[i], True, (150, 150, 150))
-            b1 = font1.render(inf1[i], True, (150, 150, 150))
-            screen.blit(a1, (500, 50*i + 300))
-            screen.blit(b1, (375, 50*i + 300))
-            screen.blit(infp, (400, 275))
+        screen.blit(pygame.font.SysFont("Arial", 45).render("Login Information:", True, (220, 60, 40)), (450, 325))
+        for i in range(1, 6):
+            screen.blit(pygame.font.SysFont("Arial", 30).render(inf[i], True, (150, 150, 150)),(550, 50*i + 375))
+            screen.blit(pygame.font.SysFont("Arial", 30).render(inf1[i], True, (150, 150, 150)),(400, 50*i + 375))
         ans1 = ans2 = ans3 = ""
     else:
-        for qna in range(0,4):
-            if prog1 == "Blood Support":
-                draw(ask[qna],bldqna[qna],isqna[qna],qnas[qna])
-            elif prog1 == "Physical Fitness":
-                draw(ask[qna],askqna[qna],isqna[qna],qnas[qna])
-            elif prog1 == "Diet Control":
-                if prog3=="OVER":
-                    draw(ask[qna],dtqna[qna],isqna[qna],qnas[qna])
-                elif prog3=="UNDER":
-                    draw(ask[qna],dtqna[qna],isqna[qna],qnas[qna])
-                else:
-                    draw(ask[qna],dtqna[qna],isqna[qna],qnas[qna])
-            elif prog1 == "About(i)":
-                a_ += d_
-                b_ += f_
-                c_ += g_
-                if a_ <= 0.5:d_ = abs(d_)
-                elif a_ >= 6:d_ = -d_
-                if b_ <= 0.5:f_ = abs(f_)
-                elif b_ >= 6:f_ = -f_
-                if c_ <= 0.5:g_ = abs(g_)
-                elif c_ >= 6:g_ = -g_
-                for ij in range(5,31):
-                    pygame.draw.rect(screen, (a_*ij, b_*ij, c_*ij),(ij*50 - 249, 0, 50, 900))
-                for jkl in range(1,12):
-                    draw(ask[3],opt[3],isqna[3],qnas[qna])
-                    ttl1 = screen.blit(pygame.font.SysFont(None,40).render("ABOUT THE APP:",True,(50,50,255)),(270,h + 20))
-                    ttl2 = screen.blit(pygame.font.SysFont(None,40).render("ACKNOWLEDGMENT:",True,(50,50,255)),(250, 30))
-                    ttl3 = screen.blit(pygame.font.SysFont(None,40).render("CREDITS:",True,(50,50,255)),(300, 296+h))
-                    sttl1 = screen.blit(pygame.font.SysFont(None,30).render("DESIGNERS:",True,(50,255,50)),(67, 341+h))
-                    sttl2 = screen.blit(pygame.font.SysFont(None,30).render("PROGRAMMERS:",True,(50,255,50)),(20, 374+h))
-                    dfg = font1.render(aboutinf[jkl],True,(200,200,200))
-                    screen.blit(dfg,(20,jkl*23 + h))
-                    try: ack = font2.render(ackn[jkl], True,(200,200,200))
-                    except: ack = font2.render("", True,(200,200,200))
-                    screen.blit(ack,(20, jkl*28 + 40))
-                    try: crd = font1.render(creds[jkl],True,(200,200,200))
-                    except:crd = font1.render("",True,(200,200,200))
-                    screen.blit(crd,(200, jkl*33 + 301 + h))
+        if prog1 == "Blood Support":
+            for qna in range(0,4):draw(ask[qna],bldqna[qna],isqna[qna],qnas[qna])
+        elif prog1 == "Physical Fitness":
+            for qna in range(0,4):draw(ask[qna],askqna[qna],isqna[qna],qnas[qna])
+        elif prog1 == "Diet Control":
+            if prog3=="OVER":
+                for qna in range(0,4):draw(ask[qna],dtqna[qna],isqna[qna],qnas[qna])
+            elif prog3=="UNDER":
+                for qna in range(0,4):draw(ask[qna],dtqna[qna],isqna[qna],qnas[qna])
+            else:
+                for qna in range(0,4):draw(ask[qna],dtqna[qna],isqna[qna],qnas[qna])
+        elif prog1 == "About(i)":
+            a_ += d_
+            b_ += f_
+            c_ += g_
+            if a_ <= 0.5:d_ = abs(d_)
+            elif a_ >= 6:d_ = -d_
+            if b_ <= 0.5:f_ = abs(f_)
+            elif b_ >= 6:f_ = -f_
+            if c_ <= 0.5:g_ = abs(g_)
+            elif c_ >= 6:g_ = -g_
+            for ij in range(5,22):
+                pygame.draw.rect(screen, (a_*ij, b_*ij, c_*ij),(ij*50 - 249, 0, 50, 900))
+            for qna in range(0,4):draw(ask[3],opt[3],isqna[3],qnas[qna])
+            ttl1 = screen.blit(pygame.font.SysFont(None,40).render("ABOUT THE APP:",True,(50,50,255)),(270,h + 20))
+            ttl2 = screen.blit(pygame.font.SysFont(None,40).render("ACKNOWLEDGMENT:",True,(50,50,255)),(250, 30))
+            ttl3 = screen.blit(pygame.font.SysFont(None,40).render("CREDITS:",True,(50,50,255)),(300, 296+h))
+            sttl1 = screen.blit(pygame.font.SysFont(None,30).render("DESIGNERS:",True,(50,255,50)),(67, 341+h))
+            sttl2 = screen.blit(pygame.font.SysFont(None,30).render("PROGRAMMERS:",True,(50,255,50)),(20, 374+h))
+            for jkl in range(1,12):
+                dfg = font1.render(aboutinf[jkl],True,(200,200,200))
+                screen.blit(dfg,(20,jkl*23 + h))
+                try: ack = font2.render(ackn[jkl], True,(200,200,200))
+                except: ack = font2.render("", True,(200,200,200))
+                screen.blit(ack,(20, jkl*28 + 40))
+                try: crd = font1.render(creds[jkl],True,(200,200,200))
+                except:crd = font1.render("",True,(200,200,200))
+                screen.blit(crd,(200, jkl*33 + 301 + h))
         if prog3 == "REQUEST" and prog1 == "Blood Support":
             abc = tk.Tk()
             abc.geometry('350x300')
@@ -400,25 +409,25 @@ while running and run:
     pygame.display.flip()
     clock.tick(60)
 pygame.quit()
-root = ctk.CTk()
-root.title("Feedback")
-root.geometry('800x500')
-root.maxsize(800, 500)
-root.minsize(800, 500)
-
-def Button_Tk():
-    feedback = Improved.get()
-    print("Feedback submitted:", feedback)
-    root.destroy()
-H1_Line = ctk.CTkLabel(root, text='We Need Your Feedback', font=('Arial', 40), text_color="lime green")
-H1_Line.place(x=100, y=20)
-H2_Line = ctk.CTkLabel(root, text='Help Us to improve by giving just a Feedback!',font=('Arial', 24), text_color="red")
-H2_Line.place(x=100, y=80)
-H3_Line = ctk.CTkLabel(root, text='You can tell us about your experience:',font=('Arial', 22))
-H3_Line.place(x=100, y=140)
-Improved = ctk.CTkEntry(root, width=600, height=100, placeholder_text="Write your feedback here...")
-Improved.place(x=100, y=180)
-Button = ctk.CTkButton(root, text='Submit', font=('Arial', 24), command=Button_Tk, width=200, height=50)
-Button.place(x=300, y=320)
-root.mainloop()
+if run and run1:
+    root = ctk.CTk()
+    root.title("Feedback")
+    root.geometry('800x500')
+    root.maxsize(800, 500)
+    root.minsize(800, 500)
+    def Button_Tk():
+        feedback = Improved.get()
+        print("Feedback submitted:", feedback)
+        root.destroy()
+    H1_Line = ctk.CTkLabel(root, text='We Need Your Feedback', font=('Arial', 40), text_color="lime green")
+    H1_Line.place(x=100, y=20)
+    H2_Line = ctk.CTkLabel(root, text='Help Us to improve by giving just a Feedback!',font=('Arial', 24), text_color="red")
+    H2_Line.place(x=100, y=80)
+    H3_Line = ctk.CTkLabel(root, text='You can tell us about your experience:',font=('Arial', 22))
+    H3_Line.place(x=100, y=140)
+    Improved = ctk.CTkEntry(root, width=600, height=100, placeholder_text="Write your feedback here...")
+    Improved.place(x=100, y=180)
+    Button = ctk.CTkButton(root, text='Submit', font=('Arial', 24), command=Button_Tk, width=200, height=50)
+    Button.place(x=300, y=320)
+    root.mainloop()
 
