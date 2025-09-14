@@ -56,6 +56,45 @@ for ent in entries:
 button.pack()
 warn.pack()
 a.mainloop()
+import customtkinter as ctk 
+xyz = ctk.CTk() 
+
+xyz.title('BMI calculator') 
+xyz.geometry('300x220') 
+xyz.maxsize(300,200) 
+xyz.minsize(300,200) 
+xyzl = ctk.CTkLabel(xyz,text='BMI calulator',font=('Jokerman',30)) 
+xyzl.place(x=60,y=0) 
+weight = ctk.CTkLabel(xyz,text='Enter Your Weight:') 
+weight.place(x=40,y=60) 
+height = ctk.CTkLabel(xyz,text='Enter Your Height:') 
+height.place(x=40,y=90) 
+entryw = ctk.CTkEntry(xyz,width=70,height=20) 
+entryw.place(x=150,y=60) 
+entryh = ctk.CTkEntry(xyz,width=70,height=20) 
+entryh.place(x=150,y=90) 
+result_label = ctk.CTkLabel(xyz, text="")
+result_label.place(x=80, y=180)
+def btnn():
+    try:
+        valuew = float(entryw.get())
+        valueh = float(entryh.get())
+        if valueh == 0:
+            result_label.configure(text="Height cannot be zero.")
+            return
+        xyz.quit()
+        xyz.destroy()
+
+    except ValueError:
+        result_label.configure(text="Enter valid numbers.")
+
+
+
+
+btn = ctk.CTkButton(xyz,text='Confirm',height=30,width=70,command=btnn) 
+btn.place(x=130,y=150) 
+print()
+xyz.mainloop()
 ackn = {
     1:"Thanks to all my teammates for working with me and helping in designing and programming.",
     2:"Special thanks Mr. Sunil Kumar Gupta sir (Computer Science) and Mrs Kiran Pawar madam (Nurse),",
@@ -361,7 +400,6 @@ while running and run:
     pygame.display.flip()
     clock.tick(60)
 pygame.quit()
-import customtkinter as ctk
 root = ctk.CTk()
 root.title("Feedback")
 root.geometry('800x500')
@@ -383,3 +421,4 @@ Improved.place(x=100, y=180)
 Button = ctk.CTkButton(root, text='Submit', font=('Arial', 24), command=Button_Tk, width=200, height=50)
 Button.place(x=300, y=320)
 root.mainloop()
+
