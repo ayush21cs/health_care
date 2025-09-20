@@ -6,6 +6,9 @@ try:
     import customtkinter as ctk
 except:
     print("installing  pygame, tkinter and customtkinter through pip install command in CMD is REQUIRED")
+name_input, age_input, gender_input, blood_group_input = "ANYONE", "19", "MALE", "O+"
+valueh = 1.9
+valuew = 80
 BRIGHT_GRAY = (200,200,200)
 DBLUE = (50,50,255)
 DGREEN = (50,255,50)
@@ -16,8 +19,8 @@ f_ = 0.04
 g_ = 0.05
 clock = pygame.time.Clock()
 running = True 
-run= run1 = False
-a = tk.Tk()
+run= run1 = True
+'''a = tk.Tk()
 def command():
     global name_input, age_input, gender_input, blood_group_input, nets, run
     name_input = entry.get()
@@ -25,20 +28,13 @@ def command():
     gender_input = entry_2.get()
     blood_group_input = entry_3.get()
     nets = [name_input, age_input, gender_input, blood_group_input]
-    if name_input == "" or age_input == "" or gender_input == "" or blood_group_input == "":
-        warn.config(text="PLEASE FILL ALL INFORMATION")
-    elif not (name_input.isupper() and gender_input.isupper() and blood_group_input.isupper()):
-        warn.config(text="ENTER IN CAPITAL ONLY")
-    elif len(name_input) <= 2:
-        warn.config(text="NAME IS TOO SMALL")
-    elif int(age_input) <= 10:
-        warn.config(text="AGE TOO SMALL, CONSULT AN ADULT IF NEEDED",width=50)
-    elif int(age_input) >= 130:
-        warn.config(text="THAT AGE IS NOT POSSIBLE, ENTER CORRECT AGE",width=50)
-    elif gender_input not in ("MALE","FEMALE","OTHERS"):
-        warn.config(text="SAY 'OTHERS' IF NOT MALE OR FEMALE",width=50)
-    elif blood_group_input not in ("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"):
-        warn.config(text="NOT CORRECT BLOOD TYPE")
+    if name_input == "" or age_input == "" or gender_input == "" or blood_group_input == "":    warn.config(text="PLEASE FILL ALL INFORMATION")
+    elif not (name_input.isupper() and gender_input.isupper() and blood_group_input.isupper()): warn.config(text="ENTER IN CAPITAL ONLY")
+    elif len(name_input) <= 2:                                                                  warn.config(text="NAME IS TOO SMALL")
+    elif int(age_input) <= 10:                                                                  warn.config(text="AGE TOO SMALL, CONSULT AN ADULT IF NEEDED",width=50)
+    elif int(age_input) >= 130:                                                                 warn.config(text="THAT AGE IS NOT POSSIBLE, ENTER CORRECT AGE",width=50)
+    elif gender_input not in ("MALE","FEMALE","OTHERS"):                                        warn.config(text="SAY 'OTHERS' IF NOT MALE OR FEMALE",width=50)
+    elif blood_group_input not in ("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"):           warn.config(text="NOT CORRECT BLOOD TYPE")
     else:
         run = True
         a.quit()
@@ -84,21 +80,16 @@ if run == True:
         try:
             valuew = float(entryw.get())
             valueh = float(entryh.get())
-            if 25>valuew or 1800<=valuew:
-                result_label.configure(text="Specified weight is not normal")
-                return
-            elif 0.5>valueh or 2.72<valueh:
-                result_label.configure(text="Specified height is not possible")
-                return
+            if 25>valuew or 1800<=valuew: result_label.configure(text="Specified weight is not normal"); return
+            elif 0.5>valueh or 2.72<valueh: result_label.configure(text="Specified height is not possible"); return
             run1 = True
             xyz.quit()
             xyz.destroy()
-        except ValueError:
-            result_label.configure(text="Enter valid numbers.")
+        except ValueError: result_label.configure(text="Enter valid numbers.")
     btn = ctk.CTkButton(xyz,text='Confirm',height=30,width=70,command=btnn) 
     btn.place(x=130,y=150) 
     print()
-    xyz.mainloop()
+    xyz.mainloop()'''
 BMI = round((valuew/valueh**2),2)
 ackn = {
     1:"Thanks to all my teammates for working with me and helping in designing and programming.",
@@ -179,6 +170,26 @@ ans_book2 = {
 mcq = {"Physical Fitness":book2, "Diet Control":book1}
 ans1 = ans2= ans3= ""
 prog = prog1 = prog3= dtb=n= 0
+def oneweek():
+    global prog, prog3,ab
+    prog = prog3 =0
+    ab.destroy
+    abab = tk.Tk()
+    abab.geometry('300x300')
+    abab.title("DIET PLAN")
+    tk.Label(text="DIET PLAN FOR ONE WEEK:",font=(None,15)).pack()
+    tk.Label(text="FATTY!",font=(None,15)).pack()
+    tk.Button(abab, text="OK", command=abab.destroy).pack()
+    abab.mainloop()
+    prog = prog3 =0
+def DP():
+    global prog, prog3,ab
+    ab = tk.Tk()
+    ab.geometry('300x300')
+    ab.title("DIET PLAN")
+    tk.Label(text="CHOOSE A DIET PLAN:",font=(None,15)).pack()
+    tk.Button(ab, text="OK", command=oneweek).pack()
+    ab.mainloop()
 def feedback():
     global run,run1
     if run and run1:
@@ -322,6 +333,8 @@ def draw(rect, text, is_button, txtsize):
                         for name2, rect in btd3.items():
                             if rect.collidepoint(m_x, m_y):
                                 prog3 = name2
+                    if prog3 == "DIET PLAN":
+                        DP()
                     if prog3 == "UNDER":
                         for name4, rect in btd4.items():
                             if rect.collidepoint(m_x, m_y):
@@ -349,7 +362,7 @@ sizey = 80
 bh = 75
 asky = 80
 bldqna = ["DONATE","REQUEST","Do you want to REQUEST or DONATE blood?", "BACK"]
-dtqna = store= ["UNDER","OVER","Are you under or over weight?", "BACK"]
+dtqna = store= ["UNDER","OVER","Are you under or over weight?", "BACK","DIET PLAN"]
 buttonp1     = pygame.Rect(70, 320+bh, sizex, sizey)
 buttonp2     = pygame.Rect(70, 470+bh, sizex, sizey)
 buttonp3     = pygame.Rect(70, 620+bh, sizex, sizey)
@@ -359,10 +372,11 @@ bq           = pygame.Rect(20, 20, 810, 250)
 by           = pygame.Rect(510, 400+asky, 150, 80)
 bn           = pygame.Rect(160, 400+asky, 150, 80)
 bk           = pygame.Rect(20, 670+asky, 130, 80)
+dc           = pygame.Rect(670, 670+asky, 150, 80)
 dumbox       = pygame.Rect(1000, 1000, 1,1)
-ask = [by, bn, bq,bk,dumbox]
-isqna = [True,True,False,True]
-qnas = [40, 40, 40,40]
+ask = [by, bn, bq,bk,dc]
+isqna = [True,True,False,True,True]
+qnas = [40, 40, 40,40,40]
 tsz = [50,50,50,50,140]
 texts = ["Blood Support", "Physical Fitness", "Diet Control", "About(i)","HEALTH CARE"]
 isbtn = [True,True,True,True,False]
@@ -383,7 +397,7 @@ list_BG = {
     "O-": "(1) Kaviya _(2) Sanatan _(3) Milan _(4) Taniya _(5) Shreya"}
 hpBG = ["(1) Sharda Hospital","(2) 1225 Hospital","(3) JK Hospital"]
 input_BG = list_BG[blood_group_input].split("_")
-askqna = ["YES","NO","", "BACK"]
+askqna = ["YES","NO","", "BACK","DIET PLAN"]
 rec = pygame.font.SysFont("Arial", 30).render("RECOMMENDED OPTION:",True,(75,75,75))
 on =None
 font1 = pygame.font.SysFont("Arial", 25)
@@ -392,6 +406,8 @@ font3 = pygame.font.SysFont(None,40)
 font4 = pygame.font.SysFont(None,30)
 screen = pygame.display.set_mode((850, 850))
 while running and run and run1:
+    k = pygame.key.get_pressed()
+    m_x, m_y = pygame.mouse.get_pos()
     screen.fill((0, 0, 0))
     if prog1 == "Physical Fitness":
         try:
@@ -399,8 +415,7 @@ while running and run and run1:
                 ans1 = ans1 + ans_book2[prog-1]
                 prog3 = 0
             askqna = ["YES","NO",mcq["Physical Fitness"][prog], "BACK"]
-        except:
-            PHans()
+        except: PHans()
     if prog1 == "Diet Control":
         if BMI < 18.5: on = by
         elif BMI > 24.9: on = bn
@@ -413,46 +428,37 @@ while running and run and run1:
                     ans2 = ans2 + underans[prog-1]
                     dtb = 0
                 dtqna = ["YES","NO",mcq["Diet Control"]["UNDER"][prog-1], "BACK"]
-            except:
-                Under()
+            except: Under()
         elif prog3 == "OVER":
             try:
                 if dtb == "YES":
                     ans3 = ans3 + overans[prog-2]
                     dtb = 0
                 dtqna = ["YES","NO",mcq["Diet Control"]["OVER"][prog-1], "BACK"]
-            except:
-                Over()
+            except: Over()
         else:
-            dtqna = ["UNDER","OVER","Are you under or over weight?", "BACK"]
+            dtqna = ["UNDER","OVER","Are you under or over weight?", "BACK","DIET PLAN"]
             ans2 = ans3 = ""
         btd4 = dict(zip(dtqna,ask))
-    k = pygame.key.get_pressed()
-    m_x, m_y = pygame.mouse.get_pos()
     for event in pygame.event.get():
         if event.type == pygame.QUIT or k[pygame.K_ESCAPE]:
             running = False
-    if prog == 0:
-        Title()
-        ans1 = ans2 = ans3 = ""
+    if prog == 0: Title(); ans1 = ans2 = ans3 = ""
     else:
         if prog1 == "Blood Support":
             for qna in range(0,4):draw(ask[qna],bldqna[qna],isqna[qna],qnas[qna])
         elif prog1 == "Physical Fitness":
             for qna in range(0,4):draw(ask[qna],askqna[qna],isqna[qna],qnas[qna])
         elif prog1 == "Diet Control":
-            if prog3=="OVER":
+            if prog3=="OVER": 
                 for qna in range(0,4):draw(ask[qna],dtqna[qna],isqna[qna],qnas[qna])
             elif prog3=="UNDER":
                 for qna in range(0,4):draw(ask[qna],dtqna[qna],isqna[qna],qnas[qna])
             else:
-                for qna in range(0,4):draw(ask[qna],dtqna[qna],isqna[qna],qnas[qna])
-        elif prog1 == "About(i)":
-            showinf()
-        if prog3 == "REQUEST" and prog1 == "Blood Support":
-            request()
-        if prog3 == "DONATE" and prog1 == "Blood Support":
-            donate()
+                for qna in range(0,5):draw(ask[qna],dtqna[qna],isqna[qna],qnas[qna])
+        elif prog1 == "About(i)": showinf()
+        if prog3 == "REQUEST" and prog1 == "Blood Support": request()
+        if prog3 == "DONATE" and prog1 == "Blood Support": donate()
     pygame.display.flip()
     clock.tick(60)
 pygame.quit()
