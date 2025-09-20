@@ -1,1 +1,467 @@
-
+'''installing  pygame, tkinter and customtkinter through pip install command in CMD is REQUIRED'''
+'''RECOMMENDED RESOLUTION IS 1920x1080 FOR BEST RESULTS'''
+try:
+    import pygame; pygame.init()
+    import tkinter as tk
+    import customtkinter as ctk
+except:
+    print("installing  pygame, tkinter and customtkinter through pip install command in CMD is REQUIRED")
+name_input, age_input, gender_input, blood_group_input = "ANYONE", "19", "MALE", "O+"
+valueh = 1.9
+valuew = 80
+BRIGHT_GRAY = (200,200,200)
+DBLUE = (50,50,255)
+DGREEN = (50,255,50)
+h = 220
+a_ = b_ = c_ = 0
+d_ = 0.03
+f_ = 0.04
+g_ = 0.05
+clock = pygame.time.Clock()
+running = True 
+run= run1 = True
+'''a = tk.Tk()
+def command():
+    global name_input, age_input, gender_input, blood_group_input, nets, run
+    name_input = entry.get()
+    age_input = entry_1.get()
+    gender_input = entry_2.get()
+    blood_group_input = entry_3.get()
+    nets = [name_input, age_input, gender_input, blood_group_input]
+    if name_input == "" or age_input == "" or gender_input == "" or blood_group_input == "":    warn.config(text="PLEASE FILL ALL INFORMATION")
+    elif not (name_input.isupper() and gender_input.isupper() and blood_group_input.isupper()): warn.config(text="ENTER IN CAPITAL ONLY")
+    elif len(name_input) <= 2:                                                                  warn.config(text="NAME IS TOO SMALL")
+    elif int(age_input) <= 10:                                                                  warn.config(text="AGE TOO SMALL, CONSULT AN ADULT IF NEEDED",width=50)
+    elif int(age_input) >= 130:                                                                 warn.config(text="THAT AGE IS NOT POSSIBLE, ENTER CORRECT AGE",width=50)
+    elif gender_input not in ("MALE","FEMALE","OTHERS"):                                        warn.config(text="SAY 'OTHERS' IF NOT MALE OR FEMALE",width=50)
+    elif blood_group_input not in ("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"):           warn.config(text="NOT CORRECT BLOOD TYPE")
+    else:
+        run = True
+        a.quit()
+        a.destroy()
+a.geometry("350x450")
+a.title("Enter Login Information:")
+Name = tk.Label(a, text="Name:", width=20, height=3)
+entry = tk.Entry(a, width=30, font=("Arial", 12), fg="blue")
+Age = tk.Label(a, text="Age:", width=20, height=3)
+entry_1 = tk.Entry(a, width=30, font=("Arial", 12), fg="blue")
+Gender = tk.Label(a, text="Gender:", width=20, height=3)
+entry_2 = tk.Entry(a, width=30, font=("Arial", 12), fg="blue")
+Blood_Group = tk.Label(a, text="Blood Group:", width=20, height=3)
+entry_3 = tk.Entry(a, width=30, font=("Arial", 12), fg="blue")
+button = tk.Button(a, text="Confirm", command=command)
+warn = tk.Label(a, text="", width=30, height=1, fg="red")
+entries = [Name, entry, Age, entry_1, Gender, entry_2, Blood_Group, entry_3]
+for ent in entries:
+    ent.pack()
+button.pack()
+warn.pack()
+a.mainloop()
+if run == True:
+    xyz = ctk.CTk() 
+    xyz.title('BMI calculator') 
+    xyz.geometry('300x220') 
+    xyz.maxsize(300,200) 
+    xyz.minsize(300,200) 
+    xyzl = ctk.CTkLabel(xyz,text='BMI calulator',font=('Jokerman',30)) 
+    xyzl.place(x=60,y=0) 
+    weight = ctk.CTkLabel(xyz,text='Enter Your Weight(Kg):') 
+    weight.place(x=20,y=60) 
+    height = ctk.CTkLabel(xyz,text='Enter Your Height(m):') 
+    height.place(x=20,y=90) 
+    entryw = ctk.CTkEntry(xyz,width=70,height=20) 
+    entryw.place(x=150,y=60) 
+    entryh = ctk.CTkEntry(xyz,width=70,height=20) 
+    entryh.place(x=150,y=90) 
+    result_label = ctk.CTkLabel(xyz, text="")
+    result_label.place(x=70, y=180)
+    def btnn():
+        global run1, valueh, valuew
+        try:
+            valuew = float(entryw.get())
+            valueh = float(entryh.get())
+            if 25>valuew or 1800<=valuew: result_label.configure(text="Specified weight is not normal"); return
+            elif 0.5>valueh or 2.72<valueh: result_label.configure(text="Specified height is not possible"); return
+            run1 = True
+            xyz.quit()
+            xyz.destroy()
+        except ValueError: result_label.configure(text="Enter valid numbers.")
+    btn = ctk.CTkButton(xyz,text='Confirm',height=30,width=70,command=btnn) 
+    btn.place(x=130,y=150) 
+    print()
+    xyz.mainloop()'''
+BMI = round((valuew/valueh**2),2)
+ackn = {
+    1:"Thanks to all my teammates for working with me and helping in designing and programming.",
+    2:"Special thanks Mr. Sunil Kumar Gupta sir (Computer Science) and Mrs Kiran Pawar madam (Nurse),",
+    3:"for providing technologies like computer and internet for us to work on, and guidance in",
+    4:"the Main Topic of this project, that is, 'HEALTH CARE'.",
+    5:"Thanks to all the people that I have worked with while making this project. Thank you."}
+aboutinf = {
+    1:"",
+    2:"PROBLEM: people died because they could not get thier correct blood type on time",
+    3:"people suffering form physical illness and having bad diet are falling behind.",
+    4:"This app is made to help people in their health.",
+    5:"This app can help someone in sudden accidents that lead to blood loss.",
+    6:"It also has Physical Fitness option so people can get an idea on how they",
+    7:"should properly excersice, overall boosting their physical fitness and even posture.",
+    8:"It also has the option Diet Control, so underweight or overweight people can get a",
+    9:"guidance on what they should do or eat and what they should NOT do or eat.",
+    10:"Overall, this app might be a blueprint/inspiration for the official app that a",
+    11:"Government shall make to help people."}
+creds = {
+    1:"Yuvraj Bain, Anupam Singh Kushwaha and Atharv Saxena",
+    2:"Shourya Pare and Ayush Mandrai"}
+inf = {1:name_input, 2:age_input, 3:gender_input, 4:blood_group_input, 5:str(BMI)}
+inf1 = {1:"name:", 2:"age:", 3:"gender:", 4:"blood group:", 5:"BMI:"}
+underbook = {
+    1:"Ok so do you eat less?", 
+    2:"Do you drink an less amount of water?",
+    3:"Do you ocassionally do a lot of physical work?",
+    4:"Do you eat junk food?",
+    5:"Do you eat oily food?",
+    6:"Do you not eat non-veg once or twice a month?",
+    7:"Do you occasionally feel pain in random parts of your body"}
+overbook = {
+    1:"Ok so do you eat a lot?", 
+    2:"Do you usually drink softdrinks?",
+    3:"Do you normally do very less or none physical work?",
+    4:"Do you eat junk food?",
+    5:"Do you eat oily food?",
+    6:"Do you eat non-veg once or twice a week?",
+    7:"Do you occasionally feel pain in random parts of your body"}
+underans = {
+    1:"",
+    2:"If you eat less, then that's the main reason why you are underweight, so eat in a balanced way, ",
+    3:"drink water frequently, in small amounts, like take 2 to 3 sips every 15 minutes or so, ",
+    4:"well, you shouldn't do a lot of physical work, you are already underweight, doing a lot of physical work can make you even slimmer, ",
+    5:"do not eat junk food, eat healthy yet calorie containing food, ",
+    6:"eating oily food is unhealthy, eat food that contain fat, ",
+    7:"eating non-veg is recommended, but if you are vegan, consider eating vegetables, ",
+    8:"feeling pain in random parts of body is common while being underweight, becoming fit is the only way to stop this, if the pain is very high, consider telling a doctor for a quick solution",}
+overans = {
+    1:"well, eating a lot is literally the reason why most people become overweight, so eat less food, ",
+    2:"don't drink softdrinks, it can hurt your lever or sugar level, it can be related to overweight, ",
+    3:"in that case, you should definetely do physical work, it can directly impact on your weight, ",
+    4:"junk food contains fat and oils, so eating them is a bad habit, so dont eat them, it can solve overweight problem, ",
+    5:"oily and junk food are related, so reduce oily food intake, ",
+    6:"eating non-veg food is ok, but reduce it and eat vegetables, ",
+    7:"overweight can cause pain in various parts of body, if pain is too much, consult a doctor",
+    8:""}
+book1 = {"UNDER":underbook, "OVER":overbook}
+book2 = {
+    1:"Do you NOT go to gym, do excercise, or do yoga?", 
+    2:"Do you usually sit at one place for a long period of time?",
+    3:"Do you can't stand properly at one place for about 20 minutes?",
+    4:"Is picking up normal objects difficult for you?",
+    5:"Do you get muscle cramps easily or frequently?",
+    6:"Do you easliy get msucle strain after heavy work?",
+    7:"Are you physically stiff (NOT flexible)?",
+    8:"Do you, by some chance, have bad posture?"}
+ans_book2 = {
+    1:"If you dont go to gym or do excercise and yoga, your physical fitness can lower, so doing little excercise at least can help a lot",
+    2:"you should not sit at one place, it can cause bad posture or bad physical health, always take short breaks in the middle,",
+    3:"standing at one place can be difficult for those who are NOT physically fit, hence, try walking or standing everyday so you can be prepared when you are forced to be standing or even walking for a long time",
+    4:"not being able to pickup normal objects means that you need to excercise your arm and hand grip strenght",
+    5:"not drinking water or sitting at one place then stretching suddenly can cause cramps, so take short breaks in between work and drink water then walk for a little bit",
+    6:"not being physically fit and doing heavy work can cause strain, muscle excercise, either legs or arm or even both is heavily required here",
+    7:"most people are not flexible because they dont do yoga, although being flexible is not a necessity, it can be good just to have it",
+    8:"having bad posture is bad, try sitting straight, have your neck straight, keep your chest straight, avoid putting shoulder more to the front (its called hunch)"}
+mcq = {"Physical Fitness":book2, "Diet Control":book1}
+ans1 = ans2= ans3= ""
+prog = prog1 = prog3= dtb=n= 0
+def oneweek():
+    global prog, prog3,ab,prog1
+    prog = prog3 =0
+    ab.destroy()
+    abab = tk.Tk()
+    abab.geometry('300x300')
+    abab.title("DIET PLAN")
+    tk.Label(text="DIET PLAN FOR ONE WEEK:",font=(None,15)).pack()
+    tk.Label(text="I DONT KNOW",font=(None,10)).pack()
+    tk.Button(abab, text="OK", command=abab.destroy).pack()
+    abab.mainloop()
+    prog =prog1= prog3 =0
+def DP():
+    global prog, prog3,ab
+    ab = tk.Tk()
+    ab.geometry('300x300')
+    ab.title("DIET PLAN")
+    tk.Label(text="CHOOSE A DIET PLAN:",font=(None,15)).pack()
+    tk.Button(ab, text="ONE WEEK PLAN", command=oneweek).pack()
+    ab.mainloop()
+def feedback():
+    global run,run1
+    if run and run1:
+        root = ctk.CTk()
+        root.title("Feedback")
+        root.geometry('800x500')
+        root.maxsize(800, 500)
+        root.minsize(800, 500)
+        def Button_Tk():
+            feedback = Improved.get()
+            print("Feedback submitted:", feedback)
+            root.destroy()
+        H1_Line = ctk.CTkLabel(root, text='We Need Your Feedback', font=('Arial', 40), text_color="lime green")
+        H1_Line.place(x=100, y=20)
+        H2_Line = ctk.CTkLabel(root, text='Help Us to improve by giving just a Feedback!',font=('Arial', 24), text_color="red")
+        H2_Line.place(x=100, y=80)
+        H3_Line = ctk.CTkLabel(root, text='You can tell us about your experience:',font=('Arial', 22))
+        H3_Line.place(x=100, y=140)
+        Improved = ctk.CTkEntry(root, width=600, height=100, placeholder_text="Write your feedback here...")
+        Improved.place(x=100, y=180)
+        Button = ctk.CTkButton(root, text='Submit', font=('Arial', 24), command=Button_Tk, width=200, height=50)
+        Button.place(x=300, y=320)
+        root.mainloop()
+def Title():
+    global button, texts, isbtn, tsz
+    for btns in range(0, 5):
+        draw(buttons[btns],texts[btns],isbtn[btns],tsz[btns])
+    screen.blit(pygame.font.SysFont("Arial", 45).render("Login Information:", True, (220, 60, 40)), (450, 325))
+    for i in range(1, 6):
+        screen.blit(pygame.font.SysFont("Arial", 30).render(inf[i], True, (150, 150, 150)),(550, 50*i + 375))
+        screen.blit(pygame.font.SysFont("Arial", 30).render(inf1[i], True, (150, 150, 150)),(400, 50*i + 375))
+def Over():
+    global ans3, prog, prog3
+    if ans3 == "":
+        ans3 = f"From the diet control survey, you seems to be doing well, but if you are really overweight, and still don't have any issue, you should still consult a doctor"
+    ab3 = tk.Tk()
+    ab3.geometry('500x500')
+    ttlb = tk.Label(text=ans3,wraplength=500, justify="left",font=(None,15))
+    ttlb.pack()
+    ab3.mainloop()
+    prog=prog3=0
+    ans3 = ""
+def Under():
+    global ans2, prog,prog3
+    if ans2 == "":
+        ans2 = f"From the diet control survey, you seems to be doing well, but if you are really underweight, and still don't have any issue, you should still consult a doctor"
+    ab2 = tk.Tk()
+    ab2.geometry('500x500')
+    ttlb = tk.Label(text=ans2,wraplength=500, justify="left",font=(None,15))
+    ttlb.pack()
+    ab2.mainloop()
+    prog=prog3=0
+    ans2 = ""
+def PHans():
+    global ans1, name_input,prog,prog1
+    if ans1 == "":
+        ans1 = f"From the physcial fitness survey, you are doing very well {name_input.title()}! Keep going!"
+    ab = tk.Tk()
+    ab.geometry('500x550')
+    ttlb = tk.Label(text=ans1,wraplength=500, justify="left",font=(None,15))
+    ttlb.pack()
+    ab.mainloop()
+    prog=prog1=0
+def showinf():
+    global a_,b_,c_,d_,f_,g_
+    a_ += d_
+    b_ += f_
+    c_ += g_
+    if a_ <= 0.5:d_ = abs(d_)
+    elif a_ >= 6:d_ = -d_
+    if b_ <= 0.5:f_ = abs(f_)
+    elif b_ >= 6:f_ = -f_
+    if c_ <= 0.5:g_ = abs(g_)
+    elif c_ >= 6:g_ = -g_
+    for ij in range(5,22):
+        pygame.draw.rect(screen, (a_*ij, b_*ij, c_*ij),(ij*50 - 249, 0, 50, 900))
+    for qna in range(0,4):draw(ask[3],opt[3],isqna[3],qnas[qna])
+    screen.blit(font3.render("ABOUT THE APP:",True,DBLUE),(270,h + 20))
+    screen.blit(font3.render("ACKNOWLEDGMENT:",True,DBLUE),(250, 30))
+    screen.blit(font3.render("CREDITS:",True,DBLUE),(300, 296+h))
+    screen.blit(font4.render("DESIGNERS:",True,DGREEN),(67, 341+h))
+    screen.blit(font4.render("PROGRAMMERS:",True,DGREEN),(20, 374+h))
+    for jkl in range(1,12):
+        dfg = font1.render(aboutinf[jkl],True,BRIGHT_GRAY)
+        screen.blit(dfg,(20,jkl*23 + h))
+        try: ack = font2.render(ackn[jkl], True,BRIGHT_GRAY)
+        except: ack = font2.render("", True,BRIGHT_GRAY)
+        screen.blit(ack,(20, jkl*28 + 40))
+        try: crd = font1.render(creds[jkl],True,BRIGHT_GRAY)
+        except:crd = font1.render("",True,BRIGHT_GRAY)
+        screen.blit(crd,(200, jkl*33 + 301 + h))        
+def donate():
+    global prog, prog3
+    ab = tk.Tk()
+    ab.geometry('350x170')
+    ab.maxsize(350,170)
+    ab.minsize(350,170)
+    ttlb = tk.Label(text="Hospital(s) you can donate to:",font=(None,15))
+    ttlb.pack()
+    for jk in range(0, 3):
+        Labelabd = tk.Label(text=hpBG[jk],font=("Arial",20))
+        Labelabd.pack()
+    button13 = tk.Button(ab, text="SEND EMAIL FOR DONATION?", command=ab.destroy)
+    button13.pack()
+    ab.mainloop()
+    prog = prog3 =0
+def request():
+    global prog, prog3
+    abc = tk.Tk()
+    abc.geometry('350x300')
+    abc.maxsize(350,300)
+    abc.minsize(350,300)
+    abc.title('')
+    ttlb = tk.Label(text="People with same blood type as you:",font=(None,15))
+    ttlb.pack()
+    for name in input_BG:
+        Labelabc=tk.Label(text=name,font=('Arial',20))
+        Labelabc.pack()
+    button12 = tk.Button(abc, text="SEND REQUEST?", command=abc.destroy)
+    button12.pack()
+    abc.mainloop()
+    prog= prog3= 0
+def draw(rect, text, is_button, txtsize):
+    global prog, n, prog1, prog3,dtb, btd4
+    if rect.collidepoint((m_x,m_y)) and is_button:
+        b = buttonp1.collidepoint((m_x,m_y))
+        if b and int(age_input) < 18: screen.blit(pygame.font.SysFont(None,33).render("NOT ALLOWED for your age!(ONLY 18+)",True,(255,0,0)), (15,350))
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button==1 and n==0:
+                if bk.collidepoint((m_x,m_y)): prog=prog3= prog1= 0
+                else:
+                    prog += 1
+                    for name, rect in btd.items():
+                        if rect.collidepoint(m_x, m_y):
+                            prog1 = name
+                    if prog1 == "Blood Support":
+                        for name1, rect in btd2.items():
+                            if rect.collidepoint(m_x, m_y):
+                                prog3 = name1
+                    elif prog1 == "Physical Fitness":
+                        for name2, rect in btd3.items():
+                            if rect.collidepoint(m_x, m_y):
+                                prog3 = name2
+                    if prog3 == "DIET PLAN":
+                        DP()
+                    if prog3 == "UNDER":
+                        for name4, rect in btd4.items():
+                            if rect.collidepoint(m_x, m_y):
+                                dtb = name4
+                    elif prog3 == "OVER":
+                        for name5, rect in btd4.items():
+                            if rect.collidepoint(m_x, m_y):
+                                dtb = name5
+                    elif prog1 == "Diet Control":
+                        for name3, rect in btd4.items():
+                            if rect.collidepoint(m_x, m_y):
+                                prog3 = name3
+            n=1
+        else:
+            n=0
+        pygame.draw.rect(screen,(170,0,0),rect)
+    else:
+        pygame.draw.rect(screen,(255,0,0),rect)
+    font2 = pygame.font.SysFont("Ariel", txtsize)
+    sent = font2.render(text, True, (255,255,255))
+    sent1 = sent.get_rect(center=rect.center)
+    screen.blit(sent,sent1)
+sizex = 300
+sizey = 80
+bh = 75
+asky = 80
+bldqna = ["DONATE","REQUEST","Do you want to REQUEST or DONATE blood?", "BACK"]
+dtqna = store= ["UNDER","OVER","Are you under or over weight?", "BACK","DIET PLAN"]
+buttonp1     = pygame.Rect(70, 320+bh, sizex, sizey)
+buttonp2     = pygame.Rect(70, 470+bh, sizex, sizey)
+buttonp3     = pygame.Rect(70, 620+bh, sizex, sizey)
+about_button = pygame.Rect(500, 620+bh, sizex - 140, sizey)
+title_box    = pygame.Rect(20, 20, 810, 250)
+bq           = pygame.Rect(20, 20, 810, 250)
+by           = pygame.Rect(510, 400+asky, 150, 80)
+bn           = pygame.Rect(160, 400+asky, 150, 80)
+bk           = pygame.Rect(20, 670+asky, 130, 80)
+dc           = pygame.Rect(670, 670+asky, 150, 80)
+dumbox       = pygame.Rect(1000, 1000, 1,1)
+ask = [by, bn, bq,bk,dc]
+isqna = [True,True,False,True,True]
+qnas = [40, 40, 40,40,40]
+tsz = [50,50,50,50,140]
+texts = ["Blood Support", "Physical Fitness", "Diet Control", "About(i)","HEALTH CARE"]
+isbtn = [True,True,True,True,False]
+buttons = [buttonp1, buttonp2, buttonp3, about_button, title_box]
+opt = ["YES","NO","", "BACK"]
+btd = dict(zip(texts,buttons))
+btd2 = dict(zip(bldqna,ask))
+btd3 = dict(zip(opt,ask))
+btd4 = dict(zip(dtqna,ask))
+list_BG = {
+    "A+": "(1) Ayush _(2) Anupam _(3) Shourya _(4) Yuvraj _(5) Atharv",
+    "A-": "(1) Ishita _(2) Rohan _(3) Mehul _(4) Kavya _(5) Sneha",
+    "B+": "(1) Arjun _(2) Priya _(3) Nikhil _(4) Sanya _(5) Dev",
+    "B-": "(1) Krishna _(2) Milan _(3) Taniya _(4) Raj _(5) Komal",
+    "AB+": "(1) Karan _(2) Shreya _(3) Siddharth _(4) Neha _(5) Ananya",
+    "AB-": "(1) Manav _(2) Pooja _(3) Aditi _(4) Raghav _(5) Simran",
+    "O+": "(1) Anshul _(2) Ram _(3) Hanuman _(4) Vikas _(5) Aarav",
+    "O-": "(1) Kaviya _(2) Sanatan _(3) Milan _(4) Taniya _(5) Shreya"}
+hpBG = ["(1) Sharda Hospital","(2) 1225 Hospital","(3) JK Hospital"]
+input_BG = list_BG[blood_group_input].split("_")
+askqna = ["YES","NO","", "BACK","DIET PLAN"]
+rec = pygame.font.SysFont("Arial", 30).render("RECOMMENDED OPTION:",True,(75,75,75))
+on =None
+font1 = pygame.font.SysFont("Arial", 25)
+font2 = pygame.font.SysFont("Arial", 23)
+font3 = pygame.font.SysFont(None,40)
+font4 = pygame.font.SysFont(None,30)
+screen = pygame.display.set_mode((850, 850))
+bx,by=0,70
+while running and run and run1:
+    k = pygame.key.get_pressed()
+    m_x, m_y = pygame.mouse.get_pos()
+    screen.fill((0, 0, 0))
+    if prog1 == "Physical Fitness":
+        try:
+            if prog3 == "YES":
+                ans1 = ans1 + ans_book2[prog-1]
+                prog3 = 0
+            askqna = ["YES","NO",mcq["Physical Fitness"][prog], "BACK"]
+        except: PHans()
+    if prog1 == "Diet Control":
+        if BMI < 18.5: on = by
+        elif BMI > 24.9: on = bn
+        else: on = dc;bx=-250;by=0
+        try:
+            if prog ==1:screen.blit(rec, (rec.get_rect(center=on.center).x+bx,rec.get_rect(center=on.center).y - by ))
+        except:pass
+        if prog3 == "UNDER":
+            try:
+                if dtb == "YES":
+                    ans2 = ans2 + underans[prog-1]
+                    dtb = 0
+                dtqna = ["YES","NO",mcq["Diet Control"]["UNDER"][prog-1], "BACK"]
+            except: Under()
+        elif prog3 == "OVER":
+            try:
+                if dtb == "YES":
+                    ans3 = ans3 + overans[prog-2]
+                    dtb = 0
+                dtqna = ["YES","NO",mcq["Diet Control"]["OVER"][prog-1], "BACK"]
+            except: Over()
+        else:
+            dtqna = ["UNDER","OVER","Are you under or over weight?", "BACK","DIET PLAN"]
+            ans2 = ans3 = ""
+        btd4 = dict(zip(dtqna,ask))
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT or k[pygame.K_ESCAPE]:
+            running = False
+    if prog == 0: Title(); ans1 = ans2 = ans3 = ""
+    else:
+        if prog1 == "Blood Support":
+            for qna in range(0,4):draw(ask[qna],bldqna[qna],isqna[qna],qnas[qna])
+        elif prog1 == "Physical Fitness":
+            for qna in range(0,4):draw(ask[qna],askqna[qna],isqna[qna],qnas[qna])
+        elif prog1 == "Diet Control":
+            if prog3=="OVER": 
+                for qna in range(0,4):draw(ask[qna],dtqna[qna],isqna[qna],qnas[qna])
+            elif prog3=="UNDER":
+                for qna in range(0,4):draw(ask[qna],dtqna[qna],isqna[qna],qnas[qna])
+            else:
+                for qna in range(0,5):draw(ask[qna],dtqna[qna],isqna[qna],qnas[qna])
+        elif prog1 == "About(i)": showinf()
+        if prog3 == "REQUEST" and prog1 == "Blood Support": request()
+        if prog3 == "DONATE" and prog1 == "Blood Support": donate()
+    pygame.display.flip()
+    clock.tick(60)
+pygame.quit()
+feedback()
