@@ -4,9 +4,15 @@ try:
     import pygame; pygame.init()
     import tkinter as tk
     import customtkinter as ctk
+    import math
 except:
     print("installing  pygame, tkinter and customtkinter through pip install command in CMD is REQUIRED")
-name_input, age_input, gender_input, blood_group_input = "ANYONE", "19", "MALE", "O+"
+height=width=850
+TXTSZ = 40
+BSZ = 80
+sosci = 0.01
+soscy = 0
+name_input, age_input, gender_input, blood_group_input = "ABC XYZ", "19", "MALE", "O+"
 valueh = 1.9
 valuew = 80
 BRIGHT_GRAY = (200,200,200)
@@ -254,18 +260,24 @@ def PHans():
     ab.mainloop()
     prog=prog1=0
 def showinf():
-    global a_,b_,c_,d_,f_,g_
+    global a_,b_,c_,d_,f_,g_,sosci,soscy
     a_ += d_
     b_ += f_
     c_ += g_
+    soscy += sosci
     if a_ <= 0.5:d_ = abs(d_)
     elif a_ >= 6:d_ = -d_
     if b_ <= 0.5:f_ = abs(f_)
     elif b_ >= 6:f_ = -f_
     if c_ <= 0.5:g_ = abs(g_)
     elif c_ >= 6:g_ = -g_
-    for ij in range(5,22):
-        pygame.draw.rect(screen, (a_*ij, b_*ij, c_*ij),(ij*50 - 249, 0, 50, 900))
+    if soscy <= 0:sosci = abs(sosci)
+    elif soscy >= 20:sosci = - sosci
+    for ij in range(0,30):
+        pygame.draw.rect(screen, (a_*ij,b_*ij, c_*ij),(ij**2*math.tan(soscy)*math.sin(soscy)+(width-50)/2, 0, 50, height))
+        pygame.draw.rect(screen, (a_*ij, b_*ij, c_*ij),(-ij**2*math.tan(soscy)*math.sin(soscy)+(width-50)/2, 0, 50, height))
+        pygame.draw.rect(screen, (a_*ij,b_*ij, c_*ij),(ij**2*math.tan(soscy)*math.sin(soscy), 0, 50, height))
+        pygame.draw.rect(screen, (a_*ij, b_*ij, c_*ij),(-ij**2*math.tan(soscy)*math.sin(soscy)+width-50, 0, 50, height))
     for qna in range(0,4):draw(ask[3],opt[3],isqna[3],qnas[qna])
     screen.blit(font3.render("ABOUT THE APP:",True,DBLUE),(270,h + 20))
     screen.blit(font3.render("ACKNOWLEDGMENT:",True,DBLUE),(250, 30))
@@ -280,7 +292,7 @@ def showinf():
         screen.blit(ack,(20, jkl*28 + 40))
         try: crd = font1.render(creds[jkl],True,BRIGHT_GRAY)
         except:crd = font1.render("",True,BRIGHT_GRAY)
-        screen.blit(crd,(200, jkl*33 + 301 + h))        
+        screen.blit(crd,(200, jkl*33 + 301 + h))    
 def donate():
     global prog, prog3
     ab = tk.Tk()
@@ -333,8 +345,6 @@ def draw(rect, text, is_button, txtsize):
                         for name2, rect in btd3.items():
                             if rect.collidepoint(m_x, m_y):
                                 prog3 = name2
-                    if prog3 == "DIET PLAN":
-                        DP()
                     if prog3 == "UNDER":
                         for name4, rect in btd4.items():
                             if rect.collidepoint(m_x, m_y):
@@ -347,6 +357,7 @@ def draw(rect, text, is_button, txtsize):
                         for name3, rect in btd4.items():
                             if rect.collidepoint(m_x, m_y):
                                 prog3 = name3
+                    print(prog3,prog1)
             n=1
         else:
             n=0
@@ -367,17 +378,16 @@ buttonp1     = pygame.Rect(70, 320+bh, sizex, sizey)
 buttonp2     = pygame.Rect(70, 470+bh, sizex, sizey)
 buttonp3     = pygame.Rect(70, 620+bh, sizex, sizey)
 about_button = pygame.Rect(500, 620+bh, sizex - 140, sizey)
-title_box    = pygame.Rect(20, 20, 810, 250)
-bq           = pygame.Rect(20, 20, 810, 250)
-by           = pygame.Rect(510, 400+asky, 150, 80)
-bn           = pygame.Rect(160, 400+asky, 150, 80)
-bk           = pygame.Rect(20, 670+asky, 130, 80)
-dc           = pygame.Rect(670, 670+asky, 150, 80)
+title_box=bq = pygame.Rect(20, 20, width-40, 250)
+by           = pygame.Rect(510, 400+asky, BSZ+70, BSZ)
+bn           = pygame.Rect(160, 400+asky, BSZ+70, BSZ)
+bk           = pygame.Rect(20, height+asky-180, BSZ+50, BSZ)
+dc           = pygame.Rect(width-180, height+asky-180, BSZ+70, BSZ)
 dumbox       = pygame.Rect(1000, 1000, 1,1)
 ask = [by, bn, bq,bk,dc]
 isqna = [True,True,False,True,True]
-qnas = [40, 40, 40,40,40]
-tsz = [50,50,50,50,140]
+qnas = [TXTSZ,TXTSZ,TXTSZ,TXTSZ,TXTSZ]
+tsz = [TXTSZ+10,TXTSZ+10,TXTSZ+10,TXTSZ+10,TXTSZ+110]
 texts = ["Blood Support", "Physical Fitness", "Diet Control", "About(i)","HEALTH CARE"]
 isbtn = [True,True,True,True,False]
 buttons = [buttonp1, buttonp2, buttonp3, about_button, title_box]
@@ -404,47 +414,15 @@ font1 = pygame.font.SysFont("Arial", 25)
 font2 = pygame.font.SysFont("Arial", 23)
 font3 = pygame.font.SysFont(None,40)
 font4 = pygame.font.SysFont(None,30)
-screen = pygame.display.set_mode((850, 850))
+screen = pygame.display.set_mode((width, height))
 bx,by=0,70
 while running and run and run1:
     k = pygame.key.get_pressed()
-    m_x, m_y = pygame.mouse.get_pos()
-    screen.fill((0, 0, 0))
-    if prog1 == "Physical Fitness":
-        try:
-            if prog3 == "YES":
-                ans1 = ans1 + ans_book2[prog-1]
-                prog3 = 0
-            askqna = ["YES","NO",mcq["Physical Fitness"][prog], "BACK"]
-        except: PHans()
-    if prog1 == "Diet Control":
-        if BMI < 18.5: on = by
-        elif BMI > 24.9: on = bn
-        else: on = dc;bx=-250;by=0
-        try:
-            if prog ==1:screen.blit(rec, (rec.get_rect(center=on.center).x+bx,rec.get_rect(center=on.center).y - by ))
-        except:pass
-        if prog3 == "UNDER":
-            try:
-                if dtb == "YES":
-                    ans2 = ans2 + underans[prog-1]
-                    dtb = 0
-                dtqna = ["YES","NO",mcq["Diet Control"]["UNDER"][prog-1], "BACK"]
-            except: Under()
-        elif prog3 == "OVER":
-            try:
-                if dtb == "YES":
-                    ans3 = ans3 + overans[prog-2]
-                    dtb = 0
-                dtqna = ["YES","NO",mcq["Diet Control"]["OVER"][prog-1], "BACK"]
-            except: Over()
-        else:
-            dtqna = ["UNDER","OVER","Are you under or over weight?", "BACK","DIET PLAN"]
-            ans2 = ans3 = ""
-        btd4 = dict(zip(dtqna,ask))
     for event in pygame.event.get():
         if event.type == pygame.QUIT or k[pygame.K_ESCAPE]:
             running = False
+    m_x, m_y = pygame.mouse.get_pos()
+    screen.fill((0, 0, 0))
     if prog == 0: Title(); ans1 = ans2 = ans3 = ""
     else:
         if prog1 == "Blood Support":
@@ -461,6 +439,40 @@ while running and run and run1:
         elif prog1 == "About(i)": showinf()
         if prog3 == "REQUEST" and prog1 == "Blood Support": request()
         if prog3 == "DONATE" and prog1 == "Blood Support": donate()
+        if prog1 == "Physical Fitness":
+            try:
+                if prog3 == "YES":
+                    ans1 = ans1 + ans_book2[prog-1]
+                    prog3 = 0
+                askqna = ["YES","NO",mcq["Physical Fitness"][prog], "BACK"]
+            except: PHans()
+        if prog1 == "Diet Control":
+            if BMI < 18.5: on = by
+            elif BMI > 24.9: on = bn
+            else: on = dc;bx=-250;by=0
+            try:
+                if prog ==1:screen.blit(rec, (rec.get_rect(center=on.center).x+bx,rec.get_rect(center=on.center).y - by ))
+            except:pass
+            if prog3 == "DIET PLAN":
+                DP()
+            elif prog3 == "UNDER":
+                try:
+                    if dtb == "YES":
+                        ans2 = ans2 + underans[prog-1]
+                        dtb = 0
+                    dtqna = ["YES","NO",mcq["Diet Control"]["UNDER"][prog-1], "BACK"]
+                except: Under()
+            elif prog3 == "OVER":
+                try:
+                    if dtb == "YES":
+                        ans3 = ans3 + overans[prog-2]
+                        dtb = 0
+                    dtqna = ["YES","NO",mcq["Diet Control"]["OVER"][prog-1], "BACK"]
+                except: Over()
+            else:
+                dtqna = ["UNDER","OVER","Are you under or over weight?", "BACK","DIET PLAN"]
+                ans2 = ans3 = ""
+            btd4 = dict(zip(dtqna,ask))
     pygame.display.flip()
     clock.tick(60)
 pygame.quit()
