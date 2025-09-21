@@ -6,7 +6,8 @@ try:
     import customtkinter as ctk
     import math
 except:
-    print("installing  pygame, tkinter and customtkinter through pip install command in CMD is REQUIRED")
+    for repeat in range(10):
+        print("installing  pygame, tkinter and customtkinter through pip install command in CMD is REQUIRED")
 height=width=850
 TXTSZ = 40
 BSZ = 80
