@@ -5,6 +5,7 @@ try:
     import tkinter as tk
     import customtkinter as ctk
     import math
+    import random
 except:
     for repeat in range(10):
         print("installing  pygame, tkinter and customtkinter through pip install command in CMD is REQUIRED")
@@ -13,6 +14,10 @@ TXTSZ = 40
 BSZ = 80
 sosci = 0.01
 soscy = 0
+sinb = width
+sinc = 0
+selfsz = random.randint(100,int(width/2))
+sind = random.randint(1,5)
 name_input, age_input, gender_input, blood_group_input = "ABC XYZ", "19", "MALE", "O+"
 valueh = 1.9
 valuew = 80
@@ -27,7 +32,7 @@ g_ = 0.05
 clock = pygame.time.Clock()
 running = True 
 run= run1 = True
-'''a = tk.Tk()
+a = tk.Tk()
 def command():
     global name_input, age_input, gender_input, blood_group_input, nets, run
     name_input = entry.get()
@@ -74,8 +79,8 @@ if run == True:
     xyzl.place(x=60,y=0) 
     weight = ctk.CTkLabel(xyz,text='Enter Your Weight(Kg):') 
     weight.place(x=20,y=60) 
-    height = ctk.CTkLabel(xyz,text='Enter Your Height(m):') 
-    height.place(x=20,y=90) 
+    heightC = ctk.CTkLabel(xyz,text='Enter Your Height(m):') 
+    heightC.place(x=20,y=90) 
     entryw = ctk.CTkEntry(xyz,width=70,height=20) 
     entryw.place(x=150,y=60) 
     entryh = ctk.CTkEntry(xyz,width=70,height=20) 
@@ -96,11 +101,11 @@ if run == True:
     btn = ctk.CTkButton(xyz,text='Confirm',height=30,width=70,command=btnn) 
     btn.place(x=130,y=150) 
     print()
-    xyz.mainloop()'''
+    xyz.mainloop()
 BMI = round((valuew/valueh**2),2)
 ackn = {
     1:"Thanks to all my teammates for working with me and helping in designing and programming.",
-    2:"Special thanks Mr. Sunil Kumar Gupta sir (Computer Science) and Mrs Kiran Pawar madam (Nurse),",
+    2:"Special thanks to Mr. Sunil Kumar Gupta sir (Computer Science) and Mrs Kiran Pawar madam (Nurse),",
     3:"for providing technologies like computer and internet for us to work on, and guidance in",
     4:"the Main Topic of this project, that is, 'HEALTH CARE'.",
     5:"Thanks to all the people that I have worked with while making this project. Thank you."}
@@ -185,7 +190,7 @@ def oneweek():
     abab.geometry('300x300')
     abab.title("DIET PLAN")
     tk.Label(text="DIET PLAN FOR ONE WEEK:",font=(None,15)).pack()
-    tk.Label(text="I DONT KNOW",font=(None,10)).pack()
+    tk.Label(text="",font=(None,10)).pack()
     tk.Button(abab, text="OK", command=abab.destroy).pack()
     abab.mainloop()
     prog =prog1= prog3 =0
@@ -260,25 +265,25 @@ def PHans():
     ttlb.pack()
     ab.mainloop()
     prog=prog1=0
+class Anim:
+    def __init__(self):
+        self.x = width
+        self.y = random.randint(0,height)
+        self.w = random.randint(100,int(width/1.5))
+        self.s = random.randint(100,600)
+    def animate(self):
+        if self.x+self.w >= 0: self.x -= self.s/100
+        else: 
+            self.w = random.randint(100,int(width/1.5))
+            self.y = random.randint(0,height-50)
+            self.x = width
+            self.s = random.randint(100,600)
+        pygame.draw.rect(screen, (a_*15,b_*15,c_*15),(self.x,self.y,self.w,50))
+rects = {f"rect{i}": Anim() for i in range(15)}
 def showinf():
-    global a_,b_,c_,d_,f_,g_,sosci,soscy
-    a_ += d_
-    b_ += f_
-    c_ += g_
-    soscy += sosci
-    if a_ <= 0.5:d_ = abs(d_)
-    elif a_ >= 6:d_ = -d_
-    if b_ <= 0.5:f_ = abs(f_)
-    elif b_ >= 6:f_ = -f_
-    if c_ <= 0.5:g_ = abs(g_)
-    elif c_ >= 6:g_ = -g_
-    if soscy <= 0:sosci = abs(sosci)
-    elif soscy >= 20:sosci = - sosci
-    for ij in range(0,30):
-        pygame.draw.rect(screen, (a_*ij,b_*ij, c_*ij),(ij**2*math.tan(soscy)*math.sin(soscy)+(width-50)/2, 0, 50, height))
-        pygame.draw.rect(screen, (a_*ij, b_*ij, c_*ij),(-ij**2*math.tan(soscy)*math.sin(soscy)+(width-50)/2, 0, 50, height))
-        pygame.draw.rect(screen, (a_*ij,b_*ij, c_*ij),(ij**2*math.tan(soscy)*math.sin(soscy), 0, 50, height))
-        pygame.draw.rect(screen, (a_*ij, b_*ij, c_*ij),(-ij**2*math.tan(soscy)*math.sin(soscy)+width-50, 0, 50, height))
+    global a_,b_,c_,d_,f_,g_,sosci,soscy,sinb,sind,sinc,selfsz
+    for rs in range(len(rects)):
+        rects[f"rect{rs}"].animate()
     for qna in range(0,4):draw(ask[3],opt[3],isqna[3],qnas[qna])
     screen.blit(font3.render("ABOUT THE APP:",True,DBLUE),(270,h + 20))
     screen.blit(font3.render("ACKNOWLEDGMENT:",True,DBLUE),(250, 30))
@@ -326,7 +331,7 @@ def request():
     abc.mainloop()
     prog= prog3= 0
 def draw(rect, text, is_button, txtsize):
-    global prog, n, prog1, prog3,dtb, btd4
+    global prog, n, prog1, prog3,dtb, btd4,a_,b_,c_
     if rect.collidepoint((m_x,m_y)) and is_button:
         b = buttonp1.collidepoint((m_x,m_y))
         if b and int(age_input) < 18: screen.blit(pygame.font.SysFont(None,33).render("NOT ALLOWED for your age!(ONLY 18+)",True,(255,0,0)), (15,350))
@@ -358,13 +363,14 @@ def draw(rect, text, is_button, txtsize):
                         for name3, rect in btd4.items():
                             if rect.collidepoint(m_x, m_y):
                                 prog3 = name3
-                    print(prog3,prog1)
             n=1
         else:
             n=0
-        pygame.draw.rect(screen,(170,0,0),rect)
+        pygame.draw.rect(screen,(170,0,0),rect,border_radius=4)
+        pygame.draw.rect(screen,(a_*30,b_*30,c_*30),rect,width=5,border_radius=3)
     else:
-        pygame.draw.rect(screen,(255,0,0),rect)
+        pygame.draw.rect(screen,(255,0,0),rect,border_radius=4)
+        pygame.draw.rect(screen,(a_*29,a_*29,a_*29),rect,width=5,border_radius=3)
     font2 = pygame.font.SysFont("Ariel", txtsize)
     sent = font2.render(text, True, (255,255,255))
     sent1 = sent.get_rect(center=rect.center)
@@ -416,8 +422,21 @@ font2 = pygame.font.SysFont("Arial", 23)
 font3 = pygame.font.SysFont(None,40)
 font4 = pygame.font.SysFont(None,30)
 screen = pygame.display.set_mode((width, height))
-bx,by=0,70
+bx,bdy=0,70
+print(BMI)
 while running and run and run1:
+    a_ += d_
+    b_ += f_
+    c_ += g_
+    soscy += sosci
+    if a_ <= 0.5:d_ = abs(d_)
+    elif a_ >= 3:d_ = -d_
+    if b_ <= 0.5:f_ = abs(f_)
+    elif b_ >= 3:f_ = -f_
+    if c_ <= 0.5:g_ = abs(g_)
+    elif c_ >= 3:g_ = -g_
+    if soscy <= 0:sosci = abs(sosci)
+    elif soscy >= 20:sosci = - sosci
     k = pygame.key.get_pressed()
     for event in pygame.event.get():
         if event.type == pygame.QUIT or k[pygame.K_ESCAPE]:
@@ -450,9 +469,9 @@ while running and run and run1:
         if prog1 == "Diet Control":
             if BMI < 18.5: on = by
             elif BMI > 24.9: on = bn
-            else: on = dc;bx=-250;by=0
+            else: on = dc;bx=-250;bdy=0
             try:
-                if prog ==1:screen.blit(rec, (rec.get_rect(center=on.center).x+bx,rec.get_rect(center=on.center).y - by ))
+                if prog ==1:screen.blit(rec, (rec.get_rect(center=on.center).x+bx,rec.get_rect(center=on.center).y - bdy ))
             except:pass
             if prog3 == "DIET PLAN":
                 DP()
@@ -478,3 +497,157 @@ while running and run and run1:
     clock.tick(60)
 pygame.quit()
 feedback()
+'''Prerequisites & Guide to Setup Assessment Platform
+To ensure smooth participation in AI VidyaSetu 1.0, all schools and teams must complete
+the following prerequisites at least one day before the competition:
+1. Mettl Mercer Installation
+Download and install the Mettl Secure Browser (Mercer | Mettl) application.
+Official download link: https://tests.mettl.com/v2/msb-download-windows-new
+Ensure the application is properly installed and tested on the system prior to the event.
+A step-by-step video guide has also been shared to assist with installation and setup.
+Participants must watch and follow the instructions carefully.
+2. System Requirements
+A laptop/desktop with:
+Minimum 2 GB RAM and updated operating system.
+Stable internet connection (minimum 1 Mbps recommended).
+Functional webcam and microphone (compulsory for proctoring).
+Disable any third-party applications or pop-up blockers that may interfere with the
+assessment platform.
+3. Pre-Check
+Perform a system compatibility test once the Mettl Mercer browser is installed.
+Ensure that the camera, microphone, and screen sharing permissions are working
+correctly.
+Schools must ensure that all participant systems are tested at least one day before the
+competition.
+4. Login Guidelines
+Use only the official credentials shared by the organizers.
+Login must be done on time; early logout will still be treated as an attempt.
+No re-logins or reattempts will be allowed once the test has started.
+Guideline Video for setup:
+https://drive.google.com/file/d/1UswMGZbuMrKaCWa3jbAJNfTGNYJMTfmV/view?
+usp=sharing'''
+'''Guideline Video for setup:
+https://drive.google.com/file/d/1UswMGZbuMrKaCWa3jbAJNfTGNYJMTfmV/view?
+usp=sharing4
+Ai VidyaSetu 1.0 2025 Guideline
+Proctoring & Misconduct Rules
+All assessments will be strictly proctored using webcam, audio and screen-tracking
+software to ensure fairness and transparency.
+Participants must keep their cameras and microphones active throughout the
+assessment.
+Any attempt to disable, manipulate or obstruct the proctoring system will be treated
+as misconduct.
+If a team logs in and exits early, the attempt will still be considered valid and recorded
+as attempted.
+In case of misconduct, requests to the organizing committee for revocation of the
+decision will not be entertained under any circumstances.
+The final decision in all matters related to AI VidyaSetu 1.0 will rest solely with the
+Organizing Committee and shall be binding on all participants and schools.
+What Constitutes Misconduct
+Misconduct includes, but is not limited to:
+Use of unauthorized devices such as mobile phones, tablets, smartwatches or
+hidden notes.
+Seeking or providing external assistance from mentors, teachers, friends, or online
+resources.
+Discussion between two or more teams during the competition, whether inside or
+outside the examination room.
+Dishonest collaboration or plagiarism, including copying answers or solutions.
+Disruptive behavior, such as creating noise, disturbing other participants, or
+arguing with invigilators/organizers.
+Tampering with system setup or software, including attempting to bypass
+proctoring mechanisms.
+Non-compliance with instructions from the invigilator or organizing team.
+Misrepresentation of identity, such as one participant attempting to compete on
+behalf of another.
+Penalties
+Any misconduct by any team from a school will result in the disqualification of the
+entire school from that stage of AI VidyaSetu 1.0.
+24
+Dos
+Adherence to Rules – Follow all competition rules, instructions, and schedules strictly.
+Fair Participation–Ensure that every team member contributes equally and responsibly.
+Professional Conduct – Maintain discipline, integrity and respect towards invigilators,
+peers, and organizers.
+System Readiness – Check your laptop/system, internet connectivity, webcam, and
+microphone in advance to avoid technical issues during the competition.
+Timely Submissions – Submit all responses and solutions exclusively through the official
+AI VidyaSetu 1.0 platform before deadlines.
+Reporting Issues –
+In case of a natural hazard, submit verifiable proof within 48 hours via the AI
+VidyaSetu 1.0 Support Box.
+In case of a technical glitch or system failure, submit valid proof within 48 hours
+through the AI VidyaSetu 1.0 official webpage.
+Proper Environment – Sit in a quiet, well-lit space with minimal disturbances and keep
+your surroundings free of books, notes, or unrelated materials.
+Identity Verification – Keep a valid school ID or authorization card ready for verification
+if requested.
+Read Instructions Carefully – Go through the guidelines and competition format before
+starting the round to avoid errors.
+Cooperation – Always cooperate with the invigilator and organizing team for smooth
+conduct of the event.
+Don’ts
+No Unauthorized Devices – Do not use mobile phones, smartwatches, tablets, or other
+electronic gadgets during the competition.
+No External Help – Do not seek assistance from mentors, teachers, parents, or online
+resources.
+No Collaboration with Other Teams – Do not communicate, share answers, or discuss
+strategies with participants outside your team.
+No Cheating/Plagiarism – Do not copy solutions or attempt to replicate someone else’s
+work.
+No Misuse of Time – Do not delay submissions or attempt to exploit system loopholes.
+No Disruption – Do not engage in arguments, noise-making, or behavior that disturbs
+other teams.
+No Switching Seats/Systems Without Permission – Remain at your assigned system and
+avoid unnecessary movement during the assessment.
+i.No Tampering – Do not attempt to alter, disable, or interfere with the proctoring
+software.
+ii.No Identity Misuse – Do not allow another individual to compete on your behalf.
+3
+Ai VidyaSetu 1.0 2025 Team Guideline
+Guidelines for Teams4 4
+Ai VidyaSetu 1.0 2025 Guideline
+Guidelines for Schools
+The Principal shall be responsible for ensuring that the school and its participants strictly
+adhere to all the prescribed Dos and Don’ts.
+Dos
+Appoint an Invigilator – Ensure the presence of a non-technical invigilator during the
+Preliminary and Regional Rounds.
+System & Infrastructure Readiness –
+Provide functional laptops/systems with updated software.
+Ensure stable internet connectivity and backup options where possible.
+Arrange a quiet, distraction-free environment for teams.
+Pre-Checks – Test all systems, webcams and microphones before the round begins to
+avoid disruptions.
+Fair Monitoring – The invigilator should actively supervise the competition and ensure all
+teams comply with rules.
+Neutral Role of Invigilator – The invigilator must remain impartial and act only as a
+monitor, not as a guide or helper.
+Reporting Misconduct – Any irregularities, malpractice or suspicious activity must be
+reported immediately to the AI VidyaSetu 1.0 organizing committee.
+Supportive Environment – Provide necessary logistical support (seating, power backup,
+etc.) to ensure smooth participation.
+Maintain Documentation – Keep attendance records, system checklists and incident
+reports ready for reference if required.
+Emergency Protocols – Be prepared with a contingency plan in case of power failure,
+internet outage or natural hazard affecting the school.
+Encourage Discipline – Guide students in advance to follow ethical practices, digital
+etiquette and competition protocols.
+Don’ts
+No Assistance to Teams – Invigilators and teachers must not provide any hints, help or
+clarifications during the competition.
+No Biased Supervision – Schools must not allow favoritism of any team.
+No Technical Interference – Schools must not tamper with or attempt to bypass the
+proctoring and monitoring system.
+No Unauthorized Access – Only designated teams and invigilators should be present in
+the competition room; outsiders must not be allowed.
+No Disturbances – Avoid making announcements, loud noises, or conducting parallel
+activities during the rounds.
+No Manipulation of Results – Schools must not attempt to influence or interfere in the
+evaluation or judging process.
+No Negligence – Failure to arrange proper systems, invigilators, or discipline may result in
+disqualification of the school.
+No Ignoring Reports – Do not delay reporting technical failures to the organizers.
+No Unauthorized Materials – Do not allow students to keep books, notes or other
+materials near their systems.
+No Identity Misuse – Schools must not permit proxy participation (a student competing
+under another student’s name).4 '''
